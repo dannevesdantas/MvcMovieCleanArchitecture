@@ -22,12 +22,12 @@ namespace MvcMovie.Infrastructure.Data
 
         }
 
-        public ICollection<Movie> SearchByTitle(string title)
+        public ICollection<Movie> GetByTitle(string title)
         {
             return _dbContext.Movies.Where(s => s.Title.Contains(title)).ToList();
         }
 
-        public ICollection<Movie> SearchByGenre(string genre)
+        public ICollection<Movie> GetByGenre(string genre)
         {
             return _dbContext.Movies.Where(x => x.Genre == genre).ToList();
         }

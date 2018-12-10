@@ -5,8 +5,8 @@ namespace MvcMovie.ApplicationCore.Interfaces
 {
     public interface IMovieRepository : IRepository<Movie>
     {
-        ICollection<Movie> SearchByTitle(string title);
-        ICollection<Movie> SearchByGenre(string genre);
+        ICollection<Movie> GetByTitle(string title);
+        ICollection<Movie> GetByGenre(string genre);
         ICollection<string> GetAllGenres();
     }
 }

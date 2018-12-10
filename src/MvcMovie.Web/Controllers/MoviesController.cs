@@ -28,12 +28,12 @@ namespace MvcMovie.Web.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                movies.AddRange(_movieRepository.SearchByTitle(searchString).ToList());
+                movies.AddRange(_movieRepository.GetByTitle(searchString).ToList());
             }
 
             if (!String.IsNullOrEmpty(movieGenre))
             {
-                movies.AddRange(_movieRepository.SearchByGenre(movieGenre));
+                movies.AddRange(_movieRepository.GetByGenre(movieGenre));
             }
 
             if (String.IsNullOrEmpty(searchString) && String.IsNullOrEmpty(movieGenre))
