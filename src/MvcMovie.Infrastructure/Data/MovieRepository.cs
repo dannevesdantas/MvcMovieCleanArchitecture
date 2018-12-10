@@ -18,7 +18,7 @@ namespace MvcMovie.Infrastructure.Data
                                             orderby m.Genre
                                             select m.Genre;
 
-            return genreQuery.ToList();
+            return genreQuery.Distinct().ToList();
 
         }
 
