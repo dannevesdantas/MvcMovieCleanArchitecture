@@ -12,7 +12,7 @@ namespace MvcMovie.Infrastructure.Data
         {
         }
 
-        public DbSet<Movie> Movie { get; set; }
+        public DbSet<Movie> Movies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
