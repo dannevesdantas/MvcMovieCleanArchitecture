@@ -14,17 +14,38 @@ namespace MvcMovie.Web.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly IRepository<Movie> _movieRepository;
+        private readonly IMovieRepository _movieRepository;
 
-        public MoviesController(IRepository<Movie> movieRepository)
+        public MoviesController(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            return View(_movieRepository.ListAll());
+            var movies = new List<Movie>();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies.AddRange(_movieRepository.SearchByTitle(searchString).ToList());
+            }
+
+            if (!String.IsNullOrEmpty(movieGenre))
+            {
+                movies.AddRange(_movieRepository.SearchByGenre(movieGenre));
+            }
+
+            if (String.IsNullOrEmpty(searchString) && String.IsNullOrEmpty(movieGenre))
+            {
+                movies = _movieRepository.ListAll().ToList();
+            }
+
+            var movieGenreVM = new MovieGenreViewModel();
+            movieGenreVM.genres = new SelectList(_movieRepository.GetAllGenres());
+            movieGenreVM.movies = movies;
+
+            return View(movieGenreVM);
         }
 
         // GET: Movies/Details/5

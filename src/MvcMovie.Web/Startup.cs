@@ -36,6 +36,7 @@ namespace MvcMovie.Web
             });
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IMovieRepository, MovieRepository>();
 
             services.AddDbContext<MvcMovieContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
